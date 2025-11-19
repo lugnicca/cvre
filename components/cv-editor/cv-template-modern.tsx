@@ -202,7 +202,7 @@ export function CVTemplateModern({
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
           <div className="mb-8 cv-section">
-            <h2 className="text-base font-bold text-blue-800 mb-4 uppercase tracking-wide">Expérience</h2>
+            <h2 className="text-base font-bold text-blue-800 mb-4 uppercase tracking-wide">Expérience Professionnelle</h2>
             <div className="space-y-6">
               {data.experience.map((exp, index) => (
                 <div

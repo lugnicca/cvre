@@ -112,6 +112,9 @@ export function CVTemplateMinimal({
       {/* About */}
       {data.about && (
         <div className="mb-10 cv-section">
+          <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
+            Profil
+          </h2>
           <div
             className={`cursor-pointer transition-all p-4 -m-4 rounded ${
               isHovered("about") ? "bg-zinc-100" : ""
@@ -129,7 +132,7 @@ export function CVTemplateMinimal({
       {data.experience && data.experience.length > 0 && (
         <div className="mb-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
-            Experience
+            Expérience Professionnelle
           </h2>
           <div className="space-y-6">
             {data.experience.map((exp, index) => (
@@ -158,7 +161,7 @@ export function CVTemplateMinimal({
       {data.education && data.education.length > 0 && (
         <div className="mb-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
-            Education
+            Formation
           </h2>
           <div className="space-y-4">
             {data.education.map((edu, index) => (
@@ -192,7 +195,7 @@ export function CVTemplateMinimal({
         {data.skills && data.skills.length > 0 && (
           <div className="cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
-              Skills
+              Compétences
             </h2>
             <div
               className={`cursor-pointer transition-all p-4 -m-4 rounded ${
@@ -217,7 +220,7 @@ export function CVTemplateMinimal({
         {data.languages && data.languages.length > 0 && (
           <div className="cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
-              Languages
+              Langues
             </h2>
             <div
               className={`cursor-pointer transition-all p-4 -m-4 rounded ${
@@ -269,7 +272,7 @@ export function CVTemplateMinimal({
       {data.hobbies && data.hobbies.length > 0 && (
         <div className="mt-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
-            Interests
+            Centres d'intérêt
           </h2>
           <div
             className={`cursor-pointer transition-all p-4 -m-4 rounded ${
