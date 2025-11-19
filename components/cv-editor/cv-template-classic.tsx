@@ -242,7 +242,7 @@ export function CVTemplateClassic({
       <div className="px-8 pb-12">
         {/* About */}
         {data.about && (
-          <div className="mb-6">
+          <div className="mb-6 cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
               Profil
             </h2>
@@ -261,7 +261,7 @@ export function CVTemplateClassic({
 
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
-          <div className="mb-6">
+          <div className="mb-6 cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
               Expérience Professionnelle
             </h2>
@@ -294,7 +294,7 @@ export function CVTemplateClassic({
 
         {/* Education */}
         {data.education && data.education.length > 0 && (
-          <div className="mb-6">
+          <div className="mb-6 cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
               Formation
             </h2>
@@ -325,7 +325,7 @@ export function CVTemplateClassic({
         <div className="grid grid-cols-2 gap-4">
           {/* Skills */}
           {data.skills && data.skills.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 cv-section">
               <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
                 Compétences
               </h2>
@@ -363,7 +363,7 @@ export function CVTemplateClassic({
 
           {/* Languages */}
           {data.languages && data.languages.length > 0 && (
-            <div className="mb-4">
+            <div className="mb-4 cv-section">
               <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
                 Langues
               </h2>
@@ -401,80 +401,82 @@ export function CVTemplateClassic({
           )}
         </div>
 
-        {/* Certifications */}
-        {data.certifications && data.certifications.length > 0 && (
-          <div className="mb-6">
-            <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
-              Certifications
-            </h2>
-            <div
-              className={`cursor-pointer transition-all p-2 -m-2 rounded ${
-                isHovered("certifications") ? "bg-blue-50" : ""
-              }`}
-              onMouseEnter={() => onSectionHover("certifications")}
-              onMouseLeave={() => onSectionHover(null)}
-              onClick={() => onSectionClick("certifications")}
-            >
-              <DndContext
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleCertificationsDragEnd}
+        <div className="grid grid-cols-2 gap-4">
+          {/* Certifications */}
+          {data.certifications && data.certifications.length > 0 && (
+            <div className="mb-6 cv-section">
+              <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
+                Certifications
+              </h2>
+              <div
+                className={`cursor-pointer transition-all p-2 -m-2 rounded ${
+                  isHovered("certifications") ? "bg-blue-50" : ""
+                }`}
+                onMouseEnter={() => onSectionHover("certifications")}
+                onMouseLeave={() => onSectionHover(null)}
+                onClick={() => onSectionClick("certifications")}
               >
-                <SortableContext
-                  items={data.certifications.map((_, i) => `cert-${i}`)}
-                  strategy={verticalListSortingStrategy}
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleCertificationsDragEnd}
                 >
-                  <ul className="list-disc list-inside space-y-0.5 text-xs text-zinc-700 pl-5">
-                    {data.certifications.map((cert, index) => (
-                      <SortableListItem key={`cert-${index}`} id={`cert-${index}`}>
-                        <li>{cert}</li>
-                      </SortableListItem>
-                    ))}
-                  </ul>
-                </SortableContext>
-              </DndContext>
+                  <SortableContext
+                    items={data.certifications.map((_, i) => `cert-${i}`)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <ul className="list-disc list-inside space-y-0.5 text-xs text-zinc-700 pl-5">
+                      {data.certifications.map((cert, index) => (
+                        <SortableListItem key={`cert-${index}`} id={`cert-${index}`}>
+                          <li>{cert}</li>
+                        </SortableListItem>
+                      ))}
+                    </ul>
+                  </SortableContext>
+                </DndContext>
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* Hobbies */}
-        {data.hobbies && data.hobbies.length > 0 && (
-          <div className="mb-6">
-            <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
-              Centres d'intérêt
-            </h2>
-            <div
-              className={`cursor-pointer transition-all p-2 -m-2 rounded ${
-                isHovered("hobbies") ? "bg-blue-50" : ""
-              }`}
-              onMouseEnter={() => onSectionHover("hobbies")}
-              onMouseLeave={() => onSectionHover(null)}
-              onClick={() => onSectionClick("hobbies")}
-            >
-              <DndContext
-                sensors={sensors}
-                collisionDetection={closestCenter}
-                onDragEnd={handleHobbiesDragEnd}
+          {/* Hobbies */}
+          {data.hobbies && data.hobbies.length > 0 && (
+            <div className="mb-6 cv-section">
+              <h2 className="text-base font-bold text-zinc-900 mb-2 uppercase tracking-wide">
+                Centres d'intérêt
+              </h2>
+              <div
+                className={`cursor-pointer transition-all p-2 -m-2 rounded ${
+                  isHovered("hobbies") ? "bg-blue-50" : ""
+                }`}
+                onMouseEnter={() => onSectionHover("hobbies")}
+                onMouseLeave={() => onSectionHover(null)}
+                onClick={() => onSectionClick("hobbies")}
               >
-                <SortableContext
-                  items={data.hobbies.map((_, i) => `hobby-${i}`)}
-                  strategy={verticalListSortingStrategy}
+                <DndContext
+                  sensors={sensors}
+                  collisionDetection={closestCenter}
+                  onDragEnd={handleHobbiesDragEnd}
                 >
-                  <div className="flex flex-wrap gap-1.5 text-xs pl-5">
-                    {data.hobbies.map((hobby, index) => (
-                      <SortableListItem key={`hobby-${index}`} id={`hobby-${index}`}>
-                        <span className="text-zinc-700">
-                          {hobby}
-                          {index < data.hobbies!.length - 1 && " •"}
-                        </span>
-                      </SortableListItem>
-                    ))}
-                  </div>
-                </SortableContext>
-              </DndContext>
+                  <SortableContext
+                    items={data.hobbies.map((_, i) => `hobby-${i}`)}
+                    strategy={verticalListSortingStrategy}
+                  >
+                    <div className="flex flex-wrap gap-1.5 text-xs pl-5">
+                      {data.hobbies.map((hobby, index) => (
+                        <SortableListItem key={`hobby-${index}`} id={`hobby-${index}`}>
+                          <span className="text-zinc-700">
+                            {hobby}
+                            {index < data.hobbies!.length - 1 && " •"}
+                          </span>
+                        </SortableListItem>
+                      ))}
+                    </div>
+                  </SortableContext>
+                </DndContext>
+              </div>
             </div>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </div>
   )

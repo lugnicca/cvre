@@ -54,7 +54,7 @@ export function CVTemplateModern({
 
         {/* Contact */}
         <div
-          className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded ${
+          className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded cv-section ${
             isHovered("personal") ? "bg-white/10" : ""
           }`}
           onMouseEnter={() => onSectionHover("personal")}
@@ -81,7 +81,7 @@ export function CVTemplateModern({
         {/* Skills */}
         {data.skills && data.skills.length > 0 && (
           <div
-            className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded ${
+            className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded cv-section ${
               isHovered("skills") ? "bg-white/10" : ""
             }`}
             onMouseEnter={() => onSectionHover("skills")}
@@ -102,7 +102,7 @@ export function CVTemplateModern({
         {/* Languages */}
         {data.languages && data.languages.length > 0 && (
           <div
-            className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded ${
+            className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded cv-section ${
               isHovered("languages") ? "bg-white/10" : ""
             }`}
             onMouseEnter={() => onSectionHover("languages")}
@@ -124,7 +124,7 @@ export function CVTemplateModern({
         {/* Hobbies */}
         {data.hobbies && data.hobbies.length > 0 && (
           <div
-            className={`cursor-pointer transition-all p-3 -m-3 rounded ${
+            className={`cursor-pointer transition-all p-3 -m-3 rounded cv-section ${
               isHovered("hobbies") ? "bg-white/10" : ""
             }`}
             onMouseEnter={() => onSectionHover("hobbies")}
@@ -145,7 +145,7 @@ export function CVTemplateModern({
       <div className="flex-1 p-12">
         {/* Name */}
         <div
-          className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded ${
+          className={`mb-8 cursor-pointer transition-all p-3 -m-3 rounded cv-section ${
             isHovered("personal") ? "bg-blue-50" : ""
           }`}
           onMouseEnter={() => onSectionHover("personal")}
@@ -158,7 +158,7 @@ export function CVTemplateModern({
 
         {/* About */}
         {data.about && (
-          <div className="mb-8">
+          <div className="mb-8 cv-section">
             <h2 className="text-base font-bold text-blue-800 mb-3 uppercase tracking-wide">Profil</h2>
             <div
               className={`cursor-pointer transition-all p-3 -m-3 rounded ${
@@ -168,14 +168,14 @@ export function CVTemplateModern({
               onMouseLeave={() => onSectionHover(null)}
               onClick={() => onSectionClick("about")}
             >
-              <p className="text-xs text-zinc-700 leading-relaxed">{data.about}</p>
+              <p className="text-xs text-zinc-700 leading-relaxed whitespace-pre-wrap">{data.about}</p>
             </div>
           </div>
         )}
 
         {/* Experience */}
         {data.experience && data.experience.length > 0 && (
-          <div className="mb-8">
+          <div className="mb-8 cv-section">
             <h2 className="text-base font-bold text-blue-800 mb-4 uppercase tracking-wide">Expérience</h2>
             <div className="space-y-6">
               {data.experience.map((exp, index) => (
@@ -198,7 +198,7 @@ export function CVTemplateModern({
                       </div>
                       <span className="text-xs text-zinc-600 font-medium">{exp.period}</span>
                     </div>
-                    <p className="text-xs text-zinc-600 leading-relaxed">{exp.description}</p>
+                    <p className="text-xs text-zinc-600 leading-relaxed whitespace-pre-wrap">{exp.description}</p>
                   </div>
                 </div>
               ))}
@@ -208,7 +208,7 @@ export function CVTemplateModern({
 
         {/* Education */}
         {data.education && data.education.length > 0 && (
-          <div className="mb-8">
+          <div className="mb-8 cv-section">
             <h2 className="text-base font-bold text-blue-800 mb-4 uppercase tracking-wide">Formation</h2>
             <div className="space-y-4">
               {data.education.map((edu, index) => (
@@ -236,7 +236,7 @@ export function CVTemplateModern({
 
         {/* Certifications */}
         {data.certifications && data.certifications.length > 0 && (
-          <div className="mb-8">
+          <div className="mb-8 cv-section">
             <h2 className="text-base font-bold text-blue-800 mb-3 uppercase tracking-wide">Certifications</h2>
             <div
               className={`cursor-pointer transition-all p-3 -m-3 rounded ${

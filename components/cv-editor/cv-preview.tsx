@@ -48,8 +48,23 @@ export function CVPreview({ data, template, onSectionClick, onPhotoClick, onData
 
   return (
     <div className="w-full h-full overflow-auto bg-zinc-100 p-8 print:p-0 print:bg-white print:overflow-visible">
-      <div id="cv-content" className="mx-auto print:w-full print:mx-0" style={{ width: "21cm" }}>
-        {renderTemplate()}
+      <div 
+        id="cv-content-wrapper"
+        className="mx-auto bg-white shadow-lg print:shadow-none" 
+        style={{ 
+          width: "210mm", 
+          minHeight: "297mm"
+        }}
+      >
+        <div 
+          id="cv-content" 
+          className="w-full h-full"
+          style={{ 
+            padding: "0"
+          }}
+        >
+          {renderTemplate()}
+        </div>
       </div>
     </div>
   )

@@ -115,7 +115,45 @@ export default function EditorPage() {
 
   // Export PDF
   const handleExportPDF = async () => {
-    window.print()
+    const wrapper = document.getElementById('cv-content-wrapper')
+    const content = document.getElementById('cv-content')
+    if (!content || !wrapper) {
+      window.print()
+      return
+    }
+
+    // Remove any previous zoom
+    wrapper.style.removeProperty('zoom')
+    content.style.removeProperty('--print-zoom')
+    
+    // Force layout recalculation
+    content.offsetHeight
+    
+    // A4 height at 96dpi: 1123px (297mm), but leave some margin for safety
+    const A4_HEIGHT_PX = 1100
+    const contentHeight = content.scrollHeight
+    
+    console.log('Content height:', contentHeight, 'Target A4 height:', A4_HEIGHT_PX)
+    
+    if (contentHeight > A4_HEIGHT_PX) {
+      // Calculate the zoom needed (zoom is better than scale for print)
+      const zoom = A4_HEIGHT_PX / contentHeight
+      console.log('Zoom needed:', zoom)
+      
+      // Set zoom via CSS variable for print media
+      content.style.setProperty('--print-zoom', zoom.toString())
+    } else {
+      content.style.setProperty('--print-zoom', '1')
+    }
+
+    // Small delay to ensure CSS variable is set before print dialog
+    setTimeout(() => {
+      window.print()
+      // Clean up after print
+      setTimeout(() => {
+        content.style.removeProperty('--print-zoom')
+      }, 100)
+    }, 50)
   }
 
   if (loading) {

@@ -28,7 +28,7 @@ export function CVTemplateMinimal({
   return (
     <div className="w-full max-w-[21cm] bg-white shadow-lg mx-auto p-16" style={{ minHeight: "29.7cm" }}>
       {/* Header */}
-      <div className="mb-12 text-center">
+      <div className="mb-12 text-center cv-section">
         <div className="flex items-center justify-center gap-8 mb-6">
           {data.photo && (
             <div
@@ -85,7 +85,7 @@ export function CVTemplateMinimal({
 
       {/* About */}
       {data.about && (
-        <div className="mb-10">
+        <div className="mb-10 cv-section">
           <div
             className={`cursor-pointer transition-all p-4 -m-4 rounded ${
               isHovered("about") ? "bg-zinc-100" : ""
@@ -94,14 +94,14 @@ export function CVTemplateMinimal({
             onMouseLeave={() => onSectionHover(null)}
             onClick={() => onSectionClick("about")}
           >
-            <p className="text-xs text-zinc-700 leading-relaxed text-center italic">{data.about}</p>
+            <p className="text-xs text-zinc-700 leading-relaxed text-center italic whitespace-pre-wrap">{data.about}</p>
           </div>
         </div>
       )}
 
       {/* Experience */}
       {data.experience && data.experience.length > 0 && (
-        <div className="mb-10">
+        <div className="mb-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
             Experience
           </h2>
@@ -121,7 +121,7 @@ export function CVTemplateMinimal({
                   <span className="text-xs text-zinc-500 uppercase tracking-wide">{exp.period}</span>
                 </div>
                 <p className="text-xs text-zinc-600 mb-2">{exp.company}</p>
-                <p className="text-xs text-zinc-700 leading-relaxed">{exp.description}</p>
+                <p className="text-xs text-zinc-700 leading-relaxed whitespace-pre-wrap">{exp.description}</p>
               </div>
             ))}
           </div>
@@ -130,7 +130,7 @@ export function CVTemplateMinimal({
 
       {/* Education */}
       {data.education && data.education.length > 0 && (
-        <div className="mb-10">
+        <div className="mb-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
             Education
           </h2>
@@ -161,7 +161,7 @@ export function CVTemplateMinimal({
       <div className="grid grid-cols-2 gap-10">
         {/* Skills */}
         {data.skills && data.skills.length > 0 && (
-          <div>
+          <div className="cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
               Skills
             </h2>
@@ -186,7 +186,7 @@ export function CVTemplateMinimal({
 
         {/* Languages */}
         {data.languages && data.languages.length > 0 && (
-          <div>
+          <div className="cv-section">
             <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
               Languages
             </h2>
@@ -213,7 +213,7 @@ export function CVTemplateMinimal({
 
       {/* Certifications */}
       {data.certifications && data.certifications.length > 0 && (
-        <div className="mt-10">
+        <div className="mt-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
             Certifications
           </h2>
@@ -238,7 +238,7 @@ export function CVTemplateMinimal({
 
       {/* Hobbies */}
       {data.hobbies && data.hobbies.length > 0 && (
-        <div className="mt-10">
+        <div className="mt-10 cv-section">
           <h2 className="text-base font-bold text-zinc-900 mb-4 uppercase tracking-widest border-b border-zinc-300 pb-2">
             Interests
           </h2>
