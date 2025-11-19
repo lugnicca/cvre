@@ -34,11 +34,17 @@ export function EditFullCVModal({
   onSave,
 }: EditFullCVModalProps) {
   const [formData, setFormData] = useState<ParsedCVData>(data)
+  const [skillsInput, setSkillsInput] = useState(data.skills.join(', '))
+  const [hobbiesInput, setHobbiesInput] = useState(data.hobbies.join(', '))
+  const [certificationsInput, setCertificationsInput] = useState(data.certifications.join(', '))
   const [isSaving, setIsSaving] = useState(false)
 
   // Synchronize formData when data prop changes (e.g., new CV analyzed)
   useEffect(() => {
     setFormData(data)
+    setSkillsInput(data.skills.join(', '))
+    setHobbiesInput(data.hobbies.join(', '))
+    setCertificationsInput(data.certifications.join(', '))
   }, [data])
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -140,17 +146,20 @@ export function EditFullCVModal({
 
   // Handlers for skills (array of strings)
   const updateSkills = (value: string) => {
-    setFormData({ ...formData, skills: value.split(',').map(s => s.trim()).filter(Boolean) })
+    setSkillsInput(value)
+    setFormData(prev => ({ ...prev, skills: value.split(',').map(s => s.trim()).filter(Boolean) }))
   }
 
   // Handlers for hobbies (array of strings)
   const updateHobbies = (value: string) => {
-    setFormData({ ...formData, hobbies: value.split(',').map(s => s.trim()).filter(Boolean) })
+    setHobbiesInput(value)
+    setFormData(prev => ({ ...prev, hobbies: value.split(',').map(s => s.trim()).filter(Boolean) }))
   }
 
   // Handlers for certifications (array of strings)
   const updateCertifications = (value: string) => {
-    setFormData({ ...formData, certifications: value.split(',').map(s => s.trim()).filter(Boolean) })
+    setCertificationsInput(value)
+    setFormData(prev => ({ ...prev, certifications: value.split(',').map(s => s.trim()).filter(Boolean) }))
   }
 
   return (
@@ -436,7 +445,7 @@ export function EditFullCVModal({
                       <Label htmlFor="skills">Compétences</Label>
                       <Textarea
                         id="skills"
-                        value={formData.skills.join(', ')}
+                        value={skillsInput}
                         onChange={(e) => updateSkills(e.target.value)}
                         placeholder="React, TypeScript, Node.js, Python..."
                         rows={5}
@@ -460,7 +469,7 @@ export function EditFullCVModal({
                       <Label htmlFor="certifications">Certifications</Label>
                       <Textarea
                         id="certifications"
-                        value={formData.certifications.join(', ')}
+                        value={certificationsInput}
                         onChange={(e) => updateCertifications(e.target.value)}
                         placeholder="AWS Certified Developer, Scrum Master..."
                         rows={3}
@@ -484,7 +493,7 @@ export function EditFullCVModal({
                       <Label htmlFor="hobbies">Loisirs</Label>
                       <Textarea
                         id="hobbies"
-                        value={formData.hobbies.join(', ')}
+                        value={hobbiesInput}
                         onChange={(e) => updateHobbies(e.target.value)}
                         placeholder="Photographie, Randonnée, Lecture..."
                         rows={3}
