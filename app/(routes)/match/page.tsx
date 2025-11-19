@@ -24,6 +24,34 @@ import {
 type Language = 'fr' | 'en'
 type MatchMode = 'light' | 'normal' | 'aggressive'
 
+const ExpandableDescription = ({ text }: { text: string }) => {
+  const [isExpanded, setIsExpanded] = useState(false)
+  
+  if (!text) return null
+  if (text.length <= 150) return <span className="text-sm text-muted-foreground">{text}</span>
+
+  return (
+    <div className="flex flex-col gap-2 w-full mt-1 relative z-50 max-h-[60vh] overflow-y-auto pr-2"
+         onClick={(e) => e.stopPropagation()} // Prevent toast click handler
+    >
+      <div className={`text-sm text-muted-foreground transition-all ${isExpanded ? '' : 'line-clamp-3'}`}>
+        {text}
+      </div>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.preventDefault()
+          e.stopPropagation()
+          setIsExpanded(!isExpanded)
+        }}
+        className="self-start text-xs font-medium text-primary hover:underline focus:outline-none sticky bottom-0 bg-background/80 backdrop-blur-sm py-1"
+      >
+        {isExpanded ? "Voir moins" : "Voir plus"}
+      </button>
+    </div>
+  )
+}
+
 export default function MatchPage() {
   const [jobDescription, setJobDescription] = useState('')
   const [url, setUrl] = useState('')
@@ -166,19 +194,20 @@ export default function MatchPage() {
         scrapedText = cleanAndFormatHtml(html)
         
       } catch (fetchError) {
-        // Check if it's likely a CORS error (TypeError: Failed to fetch)
-        const isCorsError = fetchError instanceof TypeError && fetchError.message.includes('Failed to fetch')
+        // Check if it's likely a CORS error (TypeError: Failed to fetch) or Network error
+        const errorMessage = fetchError instanceof Error ? fetchError.message : String(fetchError)
+        const isCorsOrNetworkError = 
+          errorMessage.includes('Failed to fetch') ||
+          errorMessage.toLowerCase().includes('network error') ||
+          errorMessage.toLowerCase().includes('network request failed') ||
+          fetchError instanceof TypeError
         
-        if (isCorsError) {
-          toast.error("Accès bloqué par le site (CORS)", {
-            description: "Ce site empêche la lecture automatique. Installez une extension 'CORS Unblock' ou copiez le texte manuellement.",
+        if (isCorsOrNetworkError) {
+          toast.error("Problème de récupération (CORS/Network)", {
+            description: "Impossible de lire le contenu de cette URL. Vérifiez que l'extension 'CORS Unblock' est bien installée et activée.",
             duration: 8000,
-            action: {
-              label: "Compris",
-              onClick: () => console.log("User acknowledged CORS error")
-            }
           })
-          throw new Error("Blocage CORS détecté. Essayez de copier-coller le texte.")
+          throw new Error("Erreur réseau ou CORS détectée. Vérifiez votre extension ou copiez le texte manuellement.")
         }
         
         throw fetchError
@@ -207,7 +236,7 @@ export default function MatchPage() {
       } else {
         toast.warning("Pas une offre d'emploi", {
           description: analysis.summary || "Le contenu ne semble pas être une offre d'emploi.",
-          duration: 5000,
+          duration: 8000, // Increased duration to give time to read
         })
       }
     } catch (error) {

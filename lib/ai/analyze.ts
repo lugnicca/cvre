@@ -68,7 +68,7 @@ Réponds UNIQUEMENT avec un objet JSON au format suivant (pas de texte avant ou 
 {
   "isJobPosting": true ou false (true si c'est une offre d'emploi),
   "confidence": nombre entre 0 et 1 (ton niveau de confiance),
-  "summary": "résumé COMPLET et BIEN FORMATÉ de l'offre. IMPORTANT: Si c'est une offre d'emploi, le résumé doit être structuré avec des sections claires et des listes à puces. Inclus TOUTES les informations importantes : titre du poste, entreprise, missions (avec • pour chaque mission), compétences requises (avec • pour chaque compétence), outils/technologies (avec • pour chaque outil), expérience demandée, type de contrat, localisation, avantages, etc. Utilise des sauts de ligne (\\n) pour séparer les sections. Si ce n'est pas une offre d'emploi, explique brièvement ce que contient la page."
+  "summary": "résumé COMPLET et BIEN FORMATÉ de l'offre. IMPORTANT: Si c'est une offre d'emploi, le résumé doit être structuré avec des sections claires et des listes à puces. Inclus TOUTES les informations importantes : titre du poste, entreprise, missions (avec • pour chaque mission), compétences requises (avec • pour chaque compétence), outils/technologies (avec • pour chaque outil), expérience demandée, type de contrat, localisation, avantages, etc. Utilise des sauts de ligne (\\n) pour séparer les sections. Si ce n'est pas une offre d'emploi, explique brièvement et de manière CONCISE (max 2 phrases) pourquoi le contenu ne semble pas être une offre d'emploi (ex: page de login, article de blog, page d'accueil, etc.)."
 }`
 
   try {
