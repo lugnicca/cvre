@@ -218,7 +218,9 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
           )
         },
         cell: ({ row }) => (
-          <div className="font-medium">{row.getValue("jobTitle")}</div>
+          <div className="font-medium truncate max-w-[50ch]" title={row.getValue("jobTitle")}>
+            {row.getValue("jobTitle")}
+          </div>
         ),
       },
       {
@@ -236,7 +238,9 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
           )
         },
         cell: ({ row }) => (
-          <div>{row.getValue("company")}</div>
+          <div className="truncate max-w-[50ch]" title={row.getValue("company")}>
+            {row.getValue("company")}
+          </div>
         ),
       },
       {
@@ -248,7 +252,7 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
               onClick={() => handleSortCycle(column)}
               className="h-8 px-0 hover:bg-transparent -ml-2"
             >
-              Date d'envoi
+              Date d&apos;envoi
               <SortIcon isSorted={column.getIsSorted()} />
             </Button>
           )
@@ -275,7 +279,7 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
                   <Calendar
                     mode="single"
                     selected={sentAt}
-                    onSelect={async (date) => {
+                    onSelect={async (date: Date | undefined) => {
                       await db.optimizedCVs.update(row.original.id, {
                         sentAt: date ? date.getTime() : null
                       })
@@ -352,7 +356,7 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
           return (
             <div>
               <Select value={status} onValueChange={(value) => handleStatusChange(id, value as OptimizedCV['status'])}>
-                <SelectTrigger className={`w-[130px] h-8 ${getStatusColor(status)}`}>
+                <SelectTrigger className={`w-[105px] h-7 text-xs px-2 ${getStatusColor(status)}`}>
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -370,7 +374,7 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
       {
         id: "actions",
         header: () => <div className="text-center">Actions</div>,
-        size: 200,
+        size: 130,
         cell: ({ row }) => {
           const cv = row.original
           return (
@@ -485,11 +489,11 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
                       className={`py-4 text-left text-xs font-semibold text-zinc-600 dark:text-zinc-300 uppercase tracking-wider ${
                         header.column.id === 'select' ? 'px-4' :
                         header.column.id === 'details' ? 'px-2' :
-                        header.column.id === 'actions' ? 'px-6' :
-                        'pl-4 pr-6'
+                        header.column.id === 'actions' ? 'px-2' :
+                        'pl-4 pr-2'
                       }`}
                       style={
-                        header.column.id === 'actions' ? { width: '200px', minWidth: '200px' } :
+                        header.column.id === 'actions' ? { width: '130px', minWidth: '130px' } :
                         header.column.id === 'details' ? { width: '50px', minWidth: '50px' } :
                         header.column.id === 'select' ? { width: '40px', minWidth: '40px' } :
                         undefined
@@ -519,11 +523,11 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
                         className={`py-4 whitespace-nowrap text-sm ${
                           cell.column.id === 'select' ? 'px-4' :
                           cell.column.id === 'details' ? 'px-2' :
-                          cell.column.id === 'actions' ? 'px-6' :
-                          'pl-4 pr-6'
+                          cell.column.id === 'actions' ? 'px-2' :
+                          'pl-4 pr-2'
                         }`}
                         style={
-                          cell.column.id === 'actions' ? { width: '200px', minWidth: '200px' } :
+                          cell.column.id === 'actions' ? { width: '130px', minWidth: '130px' } :
                           cell.column.id === 'details' ? { width: '50px', minWidth: '50px' } :
                           cell.column.id === 'select' ? { width: '40px', minWidth: '40px' } :
                           undefined
