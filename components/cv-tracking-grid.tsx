@@ -35,6 +35,7 @@ import {
   Trash2,
   FileEdit,
   Calendar as CalendarIcon,
+  Copy,
 } from "lucide-react"
 import { Calendar } from "@/components/ui/calendar"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
@@ -377,6 +378,18 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
         size: 130,
         cell: ({ row }) => {
           const cv = row.original
+          
+          const handleCopyJson = async (e: React.MouseEvent) => {
+            e.stopPropagation()
+            try {
+              // We copy the optimizedCV content (the structured data)
+              await navigator.clipboard.writeText(JSON.stringify(cv.optimizedCV, null, 2))
+              toast.success("JSON copié dans le presse-papier")
+            } catch (_) {
+              toast.error("Erreur lors de la copie")
+            }
+          }
+
           return (
             <div className="flex items-center justify-center gap-1">
               <Button
@@ -387,6 +400,15 @@ export function CVTrackingGrid({ data, onDataChange }: CVTrackingGridProps) {
                 title="Modifier le CV"
               >
                 <FileEdit className="h-4 w-4" />
+              </Button>
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleCopyJson}
+                className="h-8 w-8 p-0 text-zinc-600 hover:text-zinc-700 hover:bg-zinc-50 dark:hover:bg-zinc-900/20"
+                title="Copier le JSON"
+              >
+                <Copy className="h-4 w-4" />
               </Button>
               {cv.jobUrl ? (
                 <Button
