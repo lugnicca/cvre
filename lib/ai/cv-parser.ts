@@ -24,6 +24,7 @@ export interface ParsedCV {
     degree: string
     institution: string
     period: string
+    description?: string
   }>
   languages: Array<{
     name: string
@@ -138,7 +139,8 @@ Réponds UNIQUEMENT avec un objet JSON au format suivant (sans texte avant ou ap
     {
       "degree": "Diplôme obtenu",
       "institution": "Nom de l'établissement",
-      "period": "2015 - 2018"
+      "period": "2015 - 2018",
+      "description": "Description optionnelle de la formation (cours principaux, mention, projet...)"
     }
   ],
   "languages": [
@@ -208,4 +210,3 @@ IMPORTANT:
     )
   }
 }
-

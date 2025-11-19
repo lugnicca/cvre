@@ -103,6 +103,12 @@ export interface ParsedCVData {
     degree: string
     institution: string
     period: string
+    description?: string
+  }>
+  links?: Array<{
+    name: string
+    url: string
+    icon?: string
   }>
   languages: Array<{
     name: string

@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Dialog,
   DialogContent,
@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Textarea } from "@/components/ui/textarea"
 import type { EditableCVData } from "@/lib/types/cv-editor"
 
 interface EditEducationModalProps {
@@ -33,7 +34,20 @@ export function EditEducationModal({
     degree: education?.degree || "",
     institution: education?.institution || "",
     period: education?.period || "",
+    description: education?.description || "",
   })
+
+  useEffect(() => {
+    if (open) {
+      const currentEducation = index !== undefined ? data.education[index] : null
+      setFormData({
+        degree: currentEducation?.degree || "",
+        institution: currentEducation?.institution || "",
+        period: currentEducation?.period || "",
+        description: currentEducation?.description || "",
+      })
+    }
+  }, [open, index, data.education])
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -97,6 +111,17 @@ export function EditEducationModal({
               onChange={(e) => setFormData({ ...formData, period: e.target.value })}
               placeholder="2018 - 2020"
               required
+            />
+          </div>
+
+          <div>
+            <Label htmlFor="description">Description</Label>
+            <Textarea
+              id="description"
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              placeholder="Description de la formation..."
+              className="h-32"
             />
           </div>
 

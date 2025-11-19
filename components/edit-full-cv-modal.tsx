@@ -106,7 +106,7 @@ export function EditFullCVModal({
   const addEducation = () => {
     setFormData({
       ...formData,
-      education: [...formData.education, { degree: '', institution: '', period: '' }]
+      education: [...formData.education, { degree: '', institution: '', period: '', description: '' }]
     })
   }
 
@@ -360,6 +360,16 @@ export function EditFullCVModal({
                               value={edu.period}
                               onChange={(e) => updateEducation(index, 'period', e.target.value)}
                               placeholder="2015 - 2017"
+                            />
+                          </div>
+                          <div>
+                            <Label htmlFor={`edu-description-${index}`}>Description</Label>
+                            <Textarea
+                              id={`edu-description-${index}`}
+                              value={edu.description || ''}
+                              onChange={(e) => updateEducation(index, 'description', e.target.value)}
+                              placeholder="Description de la formation (optionnel)..."
+                              rows={3}
                             />
                           </div>
                         </div>

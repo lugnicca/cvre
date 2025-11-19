@@ -1,7 +1,7 @@
 "use client"
 
 import type { EditableCVData, EditableSection } from "@/lib/types/cv-editor"
-import { Mail, Phone } from "lucide-react"
+import { Mail, Phone, Link, Linkedin, Github, Globe, Twitter } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface CVTemplateMinimalProps {
@@ -11,6 +11,21 @@ interface CVTemplateMinimalProps {
   onPhotoClick: () => void
   hoveredSection: EditableSection | null
   hoveredIndex?: number
+}
+
+const getLinkIcon = (iconName?: string) => {
+  switch (iconName) {
+    case "linkedin":
+      return Linkedin
+    case "github":
+      return Github
+    case "globe":
+      return Globe
+    case "twitter":
+      return Twitter
+    default:
+      return Link
+  }
 }
 
 export function CVTemplateMinimal({
@@ -64,7 +79,7 @@ export function CVTemplateMinimal({
               <h1 className="text-3xl font-light text-zinc-900 mb-3 tracking-wide">
                 {data.name}
               </h1>
-              <div className="flex items-center justify-center gap-4 text-sm text-zinc-600">
+              <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-zinc-600">
                 {data.email && (
                   <div className="flex items-center gap-1.5">
                     <Mail className="h-3.5 w-3.5" />
@@ -77,6 +92,17 @@ export function CVTemplateMinimal({
                     <span>{data.phone}</span>
                   </div>
                 )}
+                {data.links && data.links.map((link, index) => {
+                  const Icon = getLinkIcon(link.icon)
+                  return (
+                    <div key={index} className="flex items-center gap-1.5">
+                      <Icon className="h-3.5 w-3.5" />
+                      <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:underline">
+                        {link.name}
+                      </a>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>
@@ -152,6 +178,9 @@ export function CVTemplateMinimal({
                   </div>
                   <span className="text-xs text-zinc-500 uppercase tracking-wide">{edu.period}</span>
                 </div>
+                {edu.description && (
+                  <p className="text-xs text-zinc-700 mt-1 whitespace-pre-wrap">{edu.description}</p>
+                )}
               </div>
             ))}
           </div>

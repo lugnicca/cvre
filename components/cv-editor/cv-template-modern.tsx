@@ -1,7 +1,7 @@
 "use client"
 
 import type { EditableCVData, EditableSection } from "@/lib/types/cv-editor"
-import { Mail, Phone } from "lucide-react"
+import { Mail, Phone, Link, Linkedin, Github, Globe, Twitter } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 interface CVTemplateModernProps {
@@ -11,6 +11,21 @@ interface CVTemplateModernProps {
   onPhotoClick: () => void
   hoveredSection: EditableSection | null
   hoveredIndex?: number
+}
+
+const getLinkIcon = (iconName?: string) => {
+  switch (iconName) {
+    case "linkedin":
+      return Linkedin
+    case "github":
+      return Github
+    case "globe":
+      return Globe
+    case "twitter":
+      return Twitter
+    default:
+      return Link
+  }
 }
 
 export function CVTemplateModern({
@@ -75,6 +90,17 @@ export function CVTemplateModern({
                 <span>{data.phone}</span>
               </div>
             )}
+            {data.links && data.links.map((link, index) => {
+              const Icon = getLinkIcon(link.icon)
+              return (
+                <div key={index} className="flex items-center gap-2">
+                  <Icon className="h-3.5 w-3.5" />
+                  <a href={link.url} target="_blank" rel="noopener noreferrer" className="hover:underline text-white break-all">
+                    {link.name}
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
 
@@ -228,6 +254,9 @@ export function CVTemplateModern({
                     </div>
                     <span className="text-xs text-zinc-600 font-medium">{edu.period}</span>
                   </div>
+                  {edu.description && (
+                    <p className="text-xs text-zinc-600 mt-1 whitespace-pre-wrap">{edu.description}</p>
+                  )}
                 </div>
               ))}
             </div>
